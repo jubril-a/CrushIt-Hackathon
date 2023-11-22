@@ -17,6 +17,15 @@ button {
     font-family: 'Inter', sans-serif;
 }
 
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+ul {
+    list-style-type: none;
+}
+
 /* Custom Properties */
 :root {
     --grey-50: #656266;
@@ -31,6 +40,12 @@ button {
     --stroke-50: #EBEBEB;
     --stroke-100: #E1E1E1;
     --stroke-200: #616161;
+
+    --state-hover: #F7F7F7;
+    --state-pressed: #F0F0F0;
+    --state-focused: #005BD3;
+
+    --plain-bg: #F1F1F1;
 }
 
 /* Typography */
@@ -70,16 +85,42 @@ button {
     color: #fff;
 }
 
+.text-center {
+    text-align: center;
+}
+
+.p-6px {
+    padding: 6px;
+}
+
+.p-8px {
+    padding: 8px;
+}
+
 /* Layout utils */
 .flex {
     display: flex;
-    align-items: center;
     gap: 8px;
 }
 
+.align-center {
+    align-items: center;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
 /* Header Styles */
-header {
+.header-wrapper {
     background-color: var(--grey-300);
+}
+
+header {
     padding: 12px 16px;
 }
 
@@ -124,6 +165,56 @@ input::placeholder {
     width: fit-content;
 }
 
+/* Popup Panel */
+.notifications {
+    padding: 16px;
+    max-width: 358px;
+    position: absolute;
+    top: 78px;
+    left: 16px;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--stroke-50);
+}
+
+.notifications__message {
+    padding: 16px;
+    background-color: var(--state-hover);
+}
+
+.store-admin {
+    width: 320px;
+    padding: 6px;
+    position: absolute;
+    top: 78px;
+    left: 54px;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--stroke-50);
+}
+
+[data-visible="false"] {
+    display: none;
+}
+
+[data-visible="true"] {
+    display: block;
+}
+
+.current {
+    padding: 4px 12px 4px 8px;
+    background-color: var(--state-hover);
+    border-radius: 8px;
+}
+
+.current .icon {
+    margin-right: 8px;
+    background-color: #36FBA1;
+    border-radius: 8px;
+}
+
+.stores, .store-admin__items {
+    border-bottom: 1px solid var(--state-hover);
+}
+
 /* Media Queries */ 
 @media (min-width: 1024px) {
     .desktop-only {
@@ -136,6 +227,8 @@ input::placeholder {
 
     header {
         justify-content: space-between;
+        max-width: 1240px;
+        margin: auto;
     }
 
     .store-profile {
@@ -151,8 +244,16 @@ input::placeholder {
         width: 100%;
     }
 
+    .notifications {
+        left: 1041px;
+    }
+
     .notification {
         border-radius: 8px;
+    }
+
+    .store-admin {
+        left: 1104px;
     }
 
     .store-mgt > * {
@@ -167,8 +268,9 @@ input::placeholder {
         background-color: var(--grey-50);
     }
 
-    .store-mgt > *:focus {
-        box-shadow: 0px 0px 0px 3px #005BD3, 0px 0px 0px 1px #000;
+    .focus {
+        background-color: var(--grey-50);
+        box-shadow: 0px 0px 0px 3px #005BD3, 0px 0px 0px 1px #000;  
     }
 }
 
