@@ -109,6 +109,15 @@ ul {
     transform: rotate(180deg);
 }
 
+.rotate {
+    transform: rotate(480deg);
+    transition: transform 1.5s;
+}
+
+.checkmark {
+    display: none;
+}
+
 /* Components */
 .button {
     padding: 6px 12px;
@@ -154,12 +163,8 @@ ul {
 }
 
 /* Header Styles */
-.header-wrapper {
-    background-color: var(--grey-300);
-    width: 100vw;
-}
-
 header {
+    background-color: var(--grey-300);
     padding: 12px 16px;
 }
 
@@ -197,6 +202,19 @@ input::placeholder {
     padding: 6px;
 }
 
+.tag-state:hover {
+    background-color: var(--state-hover);
+}
+
+.tag-state:active {
+    background-color: var(--state-pressed);
+}
+
+.tag-state:focus {
+    background-color: var(--state-focused);
+    box-shadow: 0px 0px 0px 3px #005BD3, 0px 0px 0px 1px #000;
+}
+
 .profile-icon {
     background-color: #36FBA1;
     padding: 10px;
@@ -204,13 +222,23 @@ input::placeholder {
     width: fit-content;
 }
 
+.store-mgt {
+    @media (max-width: 768px) {
+        margin-left: auto;
+    }
+}
+
 /* Popup Panel */
+.popups {
+    position: absolute;
+    z-index: 1000;
+    top: 78px;
+    right: 16px;
+}
+
 .notifications {
     padding: 16px;
     max-width: 358px;
-    position: absolute;
-    top: 78px;
-    left: 16px;
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--stroke-50);
 }
@@ -223,9 +251,6 @@ input::placeholder {
 .store-admin {
     width: 320px;
     padding: 6px;
-    position: absolute;
-    top: 78px;
-    left: 54px;
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--stroke-50);
 }
@@ -242,6 +267,19 @@ input::placeholder {
     padding: 4px 12px 4px 8px;
     background-color: var(--state-hover);
     border-radius: 8px;
+    width: 100%;
+}
+
+.current svg {
+    display: none;
+}
+
+.current:focus {
+    border: 2px solid var(--state-focused);
+}
+
+.current:active svg {
+    display: block;
 }
 
 .current .icon {
@@ -254,9 +292,13 @@ input::placeholder {
     border-bottom: 1px solid var(--state-hover);
 }
 
-.menu-item:hover {
+.menu-item:hover, .menu-item:active {
     background-color: var(--state-hover);
     border-radius: 8px;
+}
+
+.menu-item:focus {
+    border: 2px solid var(--state-focused);
 }
 
 /* main */
@@ -279,6 +321,11 @@ main {
 
 .trial button {
     padding: 8px;
+}
+
+.pricing-close {
+    display: grid;
+    justify-content: end;
 }
 
 /* Setup */
@@ -346,19 +393,57 @@ h2 {
     border-radius: 18px;
 }
 
+.progress-bar span {
+    flex: 0 0 20%;
+    transition: background-color 1s;
+}
+
 .active {
     background-color: #F3F3F3;
     border-radius: 10px;
     gap: 96px;
 }
 
-.active .button {
+.active > div {
+    align-items: start;
+}
+
+.active .dotted-button {
+    display: block;
+}
+
+.active .button:not(.extra-button) {
     color: var(--font-light);
     background-color: #404040;
     border-top: 1.5px solid var(--stroke-light-100, rgba(255, 255, 255, 0.20));
     border-right: 1.5px solid var(--stroke-light-100, rgba(255, 255, 255, 0.20));
     border-left: 1.5px solid var(--stroke-light-100, rgba(255, 255, 255, 0.20));
     box-shadow: 0px 0px 0px 1.5px #333, 0px 1px 0px 1.5px #333, 0px 2px 0px 0px #000;
+}
+
+.active .button:not(.extra-button):active {
+    background: #2B2B2B;
+    box-shadow: 0px 0px 0px 1.5px #333, 0px 3px 0px 0px #000 inset;
+}
+
+/*.active .button:not(.extra-button):focus {
+    box-shadow: 0px 0px 0px 5px #005BD3, 0px 0px 0px 3px #FFF, 0px 0px 0px 1.5px #333;
+}*/
+
+.extra-button {
+    color: var(--font-dark);
+}
+
+.extra-button:hover {
+    background-color: #E7E7E7;
+}
+
+.extra-button:active {
+    background-color: #E0E0E0;
+}
+
+.extra-button:focus {
+    border: 2px solid var(--states-focused, #005BD3);
 }
 
 .step:not(.active) .extra {
@@ -391,8 +476,6 @@ h2 {
 
     header {
         justify-content: space-between;
-        max-width: 1240px;
-        margin: auto;
     }
 
     .store-profile {
@@ -408,16 +491,8 @@ h2 {
         width: 100%;
     }
 
-    .notifications {
-        left: 1041px;
-    }
-
     .notification {
         border-radius: 8px;
-    }
-
-    .store-admin {
-        left: 1104px;
     }
 
     .store-mgt > * {
