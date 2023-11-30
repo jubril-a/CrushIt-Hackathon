@@ -112,6 +112,7 @@ ul {
 .rotate {
     transform: rotate(480deg);
     transition: transform 1.5s;
+    transform-origin: 50% 50%;
 }
 
 .checkmark {
